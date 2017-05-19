@@ -5,13 +5,9 @@ using UnityEngine.UI;
 
 [AddComponentMenu("UI/Effects/4 Corners Gradient")]
 public class UICornersGradient : BaseMeshEffect {
-	[ColorUsage(true, true, 0f, 8f, 1f/8f, 3f)]
 	public Color m_topLeftColor = Color.white;
-	[ColorUsage(true, true, 0f, 8f, 1f/8f, 3f)]
 	public Color m_topRightColor = Color.white;
-	[ColorUsage(true, true, 0f, 8f, 1f/8f, 3f)]
 	public Color m_bottomLeftColor = Color.white;
-	[ColorUsage(true, true, 0f, 8f, 1f/8f, 3f)]
 	public Color m_bottomRightColor = Color.white;
 
     public override void ModifyMesh(VertexHelper vh)
@@ -41,7 +37,6 @@ public class UICornersGradient : BaseMeshEffect {
 	{
 		Color top = Color.Lerp(topLeft, topRight, normalizedPosition.x);
 		Color bottom = Color.Lerp(bottomLeft, bottomRight, normalizedPosition.x);
-		// Debug.Log(topLeft + " " + topRight + " -> "  + top);
 		return Color.Lerp(bottom, top, normalizedPosition.y);
 	}
 
