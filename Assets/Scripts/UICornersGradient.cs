@@ -19,21 +19,21 @@ public class UICornersGradient : BaseMeshEffect {
 			UIVertex vertex = default(UIVertex);
 			for (int i = 0; i < vh.currentVertCount; i++) {
 				vh.PopulateUIVertex (ref vertex, i);
-				Vector2 normalizedPosition = GetNormalizedPosition(vertex.position, rect);
-				vertex.color *= GetColor(normalizedPosition, m_topLeftColor, m_topRightColor, m_bottomLeftColor, m_bottomRightColor);
+				Vector2 normalizedPosition = NormalizedPosition(vertex.position, rect);
+				vertex.color *= InterpolatedColor(normalizedPosition, m_topLeftColor, m_topRightColor, m_bottomLeftColor, m_bottomRightColor);
 				vh.SetUIVertex (vertex, i);
 			}
 		}
     }
 
-	public static Vector2 GetNormalizedPosition(Vector2 position, Rect rect)
+	public static Vector2 NormalizedPosition(Vector2 position, Rect rect)
 	{
 		float x = Mathf.InverseLerp (rect.xMin, rect.xMax, position.x);
 		float y = Mathf.InverseLerp (rect.yMin, rect.yMax, position.y);
 		return new Vector2(x, y);
 	}
 
-	public static Color GetColor(Vector2 normalizedPosition, Color topLeft, Color topRight, Color bottomLeft, Color bottomRight)
+	public static Color InterpolatedColor(Vector2 normalizedPosition, Color topLeft, Color topRight, Color bottomLeft, Color bottomRight)
 	{
 		Color top = Color.Lerp(topLeft, topRight, normalizedPosition.x);
 		Color bottom = Color.Lerp(bottomLeft, bottomRight, normalizedPosition.x);
