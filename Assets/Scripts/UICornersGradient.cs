@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[AddComponentMenu("UI/Effects/4 Corners Gradient")]
 public class UICornersGradient : BaseMeshEffect {
 	[ColorUsage(true, true, 0f, 8f, 1f/8f, 3f)]
 	public Color m_topLeftColor = Color.white;

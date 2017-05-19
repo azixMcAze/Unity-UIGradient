@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[AddComponentMenu("UI/Effects/Gradient")]
 public class UIGradient : BaseMeshEffect
 {
 	public Color m_color1 = Color.white;
