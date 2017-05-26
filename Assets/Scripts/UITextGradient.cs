@@ -10,7 +10,6 @@ public class UITextGradient : BaseMeshEffect
 	public Color m_color2 = Color.white;
 	[Range(-180f, 180f)]
 	public float m_angle = 0f;
-	public bool m_ignoreRatio = true;
 
     public override void ModifyMesh(VertexHelper vh)
     {
@@ -21,14 +20,6 @@ public class UITextGradient : BaseMeshEffect
 			float angleRad = m_angle * Mathf.Deg2Rad;
 			float sin = Mathf.Sin(angleRad);
 			float cos = Mathf.Cos(angleRad);
-
-			if (!m_ignoreRatio) {
-				float ratio = rect.height / rect.width;
-				cos *= ratio;
-				float norm = Mathf.Sqrt (cos * cos + sin * sin);
-				cos /= norm;
-				sin /= norm;
-			}
 			
 			Vector2 center = new Vector2 (0.5f, 0.5f);
 			UIVertex vertex = default(UIVertex);
