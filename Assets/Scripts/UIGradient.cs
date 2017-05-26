@@ -34,25 +34,11 @@ public class UIGradient : BaseMeshEffect
 			UIVertex vertex = default(UIVertex);
 			for (int i = 0; i < vh.currentVertCount; i++) {
 				vh.PopulateUIVertex (ref vertex, i);
-				Vector2 normalizedPosition = NormalizedPosition(vertex.position, rect);
-				Vector2 rotatedPosition = Rotate(normalizedPosition - center, cos, sin) + center;
+				Vector2 normalizedPosition = UIGradientUtils.NormalizedPosition(vertex.position, rect);
+				Vector2 rotatedPosition = UIGradientUtils.Rotate(normalizedPosition - center, cos, sin) + center;
 				vertex.color *= Color.Lerp(m_color2, m_color1, rotatedPosition.y);
 				vh.SetUIVertex (vertex, i);
 			}
 		}
     }
-
-	static Vector2 NormalizedPosition(Vector2 position, Rect rect)
-	{
-		float x = Mathf.InverseLerp (rect.xMin, rect.xMax, position.x);
-		float y = Mathf.InverseLerp (rect.yMin, rect.yMax, position.y);
-		return new Vector2(x, y);
-	}
-
-	static Vector2 Rotate(Vector2 v, float cos, float sin)
-	{
-		float x = (cos * v.x) - (sin * v.y);
-		float y = (sin * v.x) + (cos * v.y);
-		return new Vector2(x, y);
-	}
 }
