@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class UICornersGradient : BaseMeshEffect {
 	public Color m_topLeftColor = Color.white;
 	public Color m_topRightColor = Color.white;
-	public Color m_bottomLeftColor = Color.white;
 	public Color m_bottomRightColor = Color.white;
+	public Color m_bottomLeftColor = Color.white;
 
     public override void ModifyMesh(VertexHelper vh)
     {
