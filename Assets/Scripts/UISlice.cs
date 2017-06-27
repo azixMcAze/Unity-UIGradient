@@ -28,7 +28,8 @@ public class UISlice : BaseMeshEffect {
 			UIVertex v23 = default(UIVertex);
 			UIVertex v30 = default(UIVertex);
 
-			for (int i = 0; i < vh.currentVertCount; i += 4)
+			int n = vh.currentVertCount;
+			for (int i = 0; i < n; i += 4)
 			{
 				int i0 = i;
 				int i1 = i + 1;
