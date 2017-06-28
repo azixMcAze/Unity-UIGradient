@@ -60,47 +60,47 @@ public class UISlice : BaseMeshEffect {
 
 					if(split12 && split30)
 					{
-						// vh.SetUIVertex (v0, i0);
-						// vh.SetUIVertex (v1, i1);
-						// vh.SetUIVertex (v12, i2);
-						// vh.SetUIVertex (v30, i3);
+						vh.SetUIVertex (v0, i0);
+						vh.SetUIVertex (v1, i1);
+						vh.SetUIVertex (v12, i2);
+						vh.SetUIVertex (v30, i3);
 						AddUIQuad(vh, v30, v12, v2, v3);
 					}
 					else if(split01 && split23)
 					{
-						// vh.SetUIVertex (v0, i0);
+						vh.SetUIVertex (v0, i0);
 						vh.SetUIVertex (v01, i1);
 						vh.SetUIVertex (v23, i2);
-						// vh.SetUIVertex (v3, i3);
+						vh.SetUIVertex (v3, i3);
 						// int i01 = AddUIVert(vh, v01);
 						// int i23 = AddUIVert(vh, v23);
 						AddUIQuad(vh, v01, v1, v2, v23);
 					}
 					else if(split01 && split12)
 					{
-						// vh.SetUIVertex (v0, i0);
+						vh.SetUIVertex (v0, i0);
 						vh.SetUIVertex (v12, i1);
-						// vh.SetUIVertex (v2, i2);
-						// vh.SetUIVertex (v3, i3);
+						vh.SetUIVertex (v2, i2);
+						vh.SetUIVertex (v3, i3);
 						// int i01 = AddUIVert(vh, v01);
 						// int i12 = AddUIVert(vh, v12);
 						AddUIQuad(vh, v01, v1, v12, v0);
 					}
 					else if(split12 && split23)
 					{
-						// vh.SetUIVertex (v0, i0);
-						// vh.SetUIVertex (v1, i1);
+						vh.SetUIVertex (v0, i0);
+						vh.SetUIVertex (v1, i1);
 						vh.SetUIVertex (v23, i2);
-						// vh.SetUIVertex (v3, i3);
+						vh.SetUIVertex (v3, i3);
 						// int i12 = AddUIVert(vh, v12);
 						// int i23 = AddUIVert(vh, v23);
 						AddUIQuad(vh, v12, v2, v23, v1);
 					}
 					else if(split23 && split30)
 					{
-						// vh.SetUIVertex (v0, i0);
-						// vh.SetUIVertex (v1, i1);
-						// vh.SetUIVertex (v2, i2);
+						vh.SetUIVertex (v0, i0);
+						vh.SetUIVertex (v1, i1);
+						vh.SetUIVertex (v2, i2);
 						vh.SetUIVertex (v30, i3);
 						// int i23 = AddUIVert(vh, v23);
 						// int i30 = AddUIVert(vh, v30);
@@ -109,9 +109,9 @@ public class UISlice : BaseMeshEffect {
 					else if(split30 && split01)
 					{
 						vh.SetUIVertex (v01, i0);
-						// vh.SetUIVertex (v1, i1);
-						// vh.SetUIVertex (v2, i2);
-						// vh.SetUIVertex (v3, i3);
+						vh.SetUIVertex (v1, i1);
+						vh.SetUIVertex (v2, i2);
+						vh.SetUIVertex (v3, i3);
 						// int i30 = AddUIVert(vh, v30);
 						// int i01 = AddUIVert(vh, v01);
 						AddUIQuad(vh, v01, v3, v30, v0);
