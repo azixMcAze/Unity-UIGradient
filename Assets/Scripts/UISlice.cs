@@ -84,7 +84,7 @@ public class UISlice : BaseMeshEffect {
 						// vh.SetUIVertex (v3, i3);
 						// int i01 = AddUIVert(vh, v01);
 						// int i12 = AddUIVert(vh, v12);
-						AddUIQuad(vh, v0, v01, v1, v12);
+						AddUIQuad(vh, v01, v1, v12, v0);
 					}
 					else if(split12 && split23)
 					{
@@ -94,7 +94,7 @@ public class UISlice : BaseMeshEffect {
 						// vh.SetUIVertex (v3, i3);
 						// int i12 = AddUIVert(vh, v12);
 						// int i23 = AddUIVert(vh, v23);
-						AddUIQuad(vh, v3, v12, v2, v23);
+						AddUIQuad(vh, v12, v2, v23, v1);
 					}
 					else if(split23 && split30)
 					{
@@ -114,7 +114,7 @@ public class UISlice : BaseMeshEffect {
 						// vh.SetUIVertex (v3, i3);
 						// int i30 = AddUIVert(vh, v30);
 						// int i01 = AddUIVert(vh, v01);
-						AddUIQuad(vh, v0, v01, v3, v30);
+						AddUIQuad(vh, v01, v3, v30, v0);
 					}
 
 
