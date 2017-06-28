@@ -17,7 +17,7 @@ public class UISlice : BaseMeshEffect {
 			float angleRad = m_angle * Mathf.Deg2Rad;
 			float sin = Mathf.Sin(angleRad);
 			float cos = Mathf.Cos(angleRad);
-			
+
 			UIVertex v0 = default(UIVertex);
 			UIVertex v1 = default(UIVertex);
 			UIVertex v2 = default(UIVertex);
@@ -72,8 +72,6 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v01, i1);
 						vh.SetUIVertex (v23, i2);
 						vh.SetUIVertex (v3, i3);
-						// int i01 = AddUIVert(vh, v01);
-						// int i23 = AddUIVert(vh, v23);
 						AddUIQuad(vh, v01, v1, v2, v23);
 					}
 					else if(split01 && split12)
@@ -82,8 +80,6 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v12, i1);
 						vh.SetUIVertex (v2, i2);
 						vh.SetUIVertex (v3, i3);
-						// int i01 = AddUIVert(vh, v01);
-						// int i12 = AddUIVert(vh, v12);
 						AddUIQuad(vh, v01, v1, v12, v0);
 					}
 					else if(split12 && split23)
@@ -92,8 +88,6 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v1, i1);
 						vh.SetUIVertex (v23, i2);
 						vh.SetUIVertex (v3, i3);
-						// int i12 = AddUIVert(vh, v12);
-						// int i23 = AddUIVert(vh, v23);
 						AddUIQuad(vh, v12, v2, v23, v1);
 					}
 					else if(split23 && split30)
@@ -102,8 +96,6 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v1, i1);
 						vh.SetUIVertex (v2, i2);
 						vh.SetUIVertex (v30, i3);
-						// int i23 = AddUIVert(vh, v23);
-						// int i30 = AddUIVert(vh, v30);
 						AddUIQuad(vh, v30, v2, v23, v3);
 					}
 					else if(split30 && split01)
@@ -112,23 +104,9 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v1, i1);
 						vh.SetUIVertex (v2, i2);
 						vh.SetUIVertex (v3, i3);
-						// int i30 = AddUIVert(vh, v30);
-						// int i01 = AddUIVert(vh, v01);
 						AddUIQuad(vh, v01, v3, v30, v0);
 					}
-
-
-
-					// v0.color = side0 ? Color.red : Color.blue;
-					// v1.color = side1 ? Color.red : Color.blue;
-					// v2.color = side2 ? Color.red : Color.blue;
-					// v3.color = side3 ? Color.red : Color.blue;
 				}
-
-				// vh.SetUIVertex (v0, i0);
-				// vh.SetUIVertex (v1, i1);
-				// vh.SetUIVertex (v2, i2);
-				// vh.SetUIVertex (v3, i3);
 			}
 		}
 	}
