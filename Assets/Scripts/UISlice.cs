@@ -64,7 +64,7 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v1, i1);
 						vh.SetUIVertex (v12, i2);
 						vh.SetUIVertex (v30, i3);
-						AddUIQuad(vh, v30, v12, v2, v3);
+						UIGradientUtils.AddQuad(vh, v30, v12, v2, v3);
 					}
 					else if(split01 && split23)
 					{
@@ -72,7 +72,7 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v01, i1);
 						vh.SetUIVertex (v23, i2);
 						vh.SetUIVertex (v3, i3);
-						AddUIQuad(vh, v01, v1, v2, v23);
+						UIGradientUtils.AddQuad(vh, v01, v1, v2, v23);
 					}
 					else if(split01 && split12)
 					{
@@ -80,7 +80,7 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v12, i1);
 						vh.SetUIVertex (v2, i2);
 						vh.SetUIVertex (v3, i3);
-						AddUIQuad(vh, v01, v1, v12, v0);
+						UIGradientUtils.AddQuad(vh, v01, v1, v12, v0);
 					}
 					else if(split12 && split23)
 					{
@@ -88,7 +88,7 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v1, i1);
 						vh.SetUIVertex (v23, i2);
 						vh.SetUIVertex (v3, i3);
-						AddUIQuad(vh, v12, v2, v23, v1);
+						UIGradientUtils.AddQuad(vh, v12, v2, v23, v1);
 					}
 					else if(split23 && split30)
 					{
@@ -96,7 +96,7 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v1, i1);
 						vh.SetUIVertex (v2, i2);
 						vh.SetUIVertex (v30, i3);
-						AddUIQuad(vh, v30, v2, v23, v3);
+						UIGradientUtils.AddQuad(vh, v30, v2, v23, v3);
 					}
 					else if(split30 && split01)
 					{
@@ -104,7 +104,7 @@ public class UISlice : BaseMeshEffect {
 						vh.SetUIVertex (v1, i1);
 						vh.SetUIVertex (v2, i2);
 						vh.SetUIVertex (v3, i3);
-						AddUIQuad(vh, v01, v3, v30, v0);
+						UIGradientUtils.AddQuad(vh, v01, v3, v30, v0);
 					}
 				}
 			}
@@ -132,28 +132,4 @@ public class UISlice : BaseMeshEffect {
 			return false;
 		}
 	}
-
-	static int AddUIVert(VertexHelper vh, UIVertex v)
-	{
-		int i = vh.currentVertCount;
-		vh.AddVert(v);
-		return i;
-	}
-
-	static void AddUIQuad(VertexHelper vh, UIVertex v0, UIVertex v1, UIVertex v2, UIVertex v3)
-	{
-		int i0 = AddUIVert(vh, v0);
-		int i1 = AddUIVert(vh, v1);
-		int i2 = AddUIVert(vh, v2);
-		int i3 = AddUIVert(vh, v3);
-		vh.AddTriangle(i0, i1, i2);
-		vh.AddTriangle(i2, i3, i0);
-	}
-
-	// static void AddUIQuad(VertexHelper vh, int i0, int i1, int i2, int i3)
-	// {
-	// 	vh.AddTriangle(i0, i1, i2);
-	// 	vh.AddTriangle(i2, i3, i0);
-	// }
-
 }
