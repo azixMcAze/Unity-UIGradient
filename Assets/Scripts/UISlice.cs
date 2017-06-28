@@ -6,7 +6,14 @@ using UnityEngine.UI;
 public class UISlice : BaseMeshEffect {
     [Range(-180f, 180f)]
     public float m_angle = 0f;
+    [Range(0f, 1f)]
     public float m_slice = 0.5f;
+    public bool m_option12_30;
+    public bool m_option01_23;
+    public bool m_option01_12;
+    public bool m_option12_23;
+    public bool m_option23_30;
+    public bool m_option30_01;
 
     public override void ModifyMesh(VertexHelper vh)
     {
@@ -60,8 +67,16 @@ public class UISlice : BaseMeshEffect {
                         0---x---3       0--30---3
                         */
 
-                        UIGradientUtils.SetQuad(vh, v0, v1, v12, v30, i);
-                        UIGradientUtils.AddQuad(vh, v30, v12, v2, v3);
+                        if (m_option12_30)
+                        {
+                            UIGradientUtils.SetQuad(vh, v0, v1, v12, v30, i);
+                            UIGradientUtils.AddQuad(vh, v30, v12, v2, v3);
+                        }
+                        else
+                        {
+                            UIGradientUtils.SetQuad(vh, v30, v12, v2, v3, i);
+                            UIGradientUtils.AddQuad(vh, v0, v1, v12, v30);
+                        }
                     }
                     else if(split01 && split23)
                     {
@@ -72,9 +87,16 @@ public class UISlice : BaseMeshEffect {
                         | /     |       |   /   |
                         0-------3       0-------3
                         */
-
-                        UIGradientUtils.SetQuad(vh,v0, v01, v23, v3, i);
-                        UIGradientUtils.AddQuad(vh, v01, v1, v2, v23);
+                        if (m_option01_23)
+                        {
+                            UIGradientUtils.SetQuad(vh, v0, v01, v23, v3, i);
+                            UIGradientUtils.AddQuad(vh, v01, v1, v2, v23);
+                        }
+                        else
+                        {
+                            UIGradientUtils.SetQuad(vh, v01, v1, v2, v23, i);
+                            UIGradientUtils.AddQuad(vh, v0, v01, v23, v3);
+                        }
                     }
                     else if(split01 && split12)
                     {
@@ -86,8 +108,16 @@ public class UISlice : BaseMeshEffect {
                         0-------3       0-------3
                         */
 
-                        UIGradientUtils.SetQuad(vh, v0, v12, v2, v3, i);
-                        UIGradientUtils.AddQuad(vh, v01, v1, v12, v0);
+                        if (m_option01_12)
+                        {
+                            UIGradientUtils.SetQuad(vh, v0, v12, v2, v3, i);
+                            UIGradientUtils.AddQuad(vh, v01, v1, v12, v0);
+                        }
+                        else
+                        {
+                            UIGradientUtils.SetQuad(vh, v0, v01, v2, v3, i);
+                            UIGradientUtils.AddQuad(vh, v01, v1, v12, v2);
+                        }
                     }
                     else if(split12 && split23)
                     {
@@ -98,9 +128,17 @@ public class UISlice : BaseMeshEffect {
                         | /     |       | /     |
                         0-------3       0-------3
                         */
-
-                        UIGradientUtils.SetQuad(vh, v0, v1, v23, v3, i);
-                        UIGradientUtils.AddQuad(vh, v12, v2, v23, v1);
+                        
+                        if (m_option12_23)
+                        {
+                            UIGradientUtils.SetQuad(vh, v0, v1, v23, v3, i);
+                            UIGradientUtils.AddQuad(vh, v12, v2, v23, v1);
+                        }
+                        else
+                        {
+                            UIGradientUtils.SetQuad(vh, v0, v1, v12, v3, i);
+                            UIGradientUtils.AddQuad(vh, v12, v2, v23, v3);
+                        }
                     }
                     else if(split23 && split30)
                     {
@@ -111,9 +149,17 @@ public class UISlice : BaseMeshEffect {
                         | /     |       |  \| / |
                         0---x---3       0---30--3
                         */
-
-                        UIGradientUtils.SetQuad(vh, v0, v1, v2, v30, i);
-                        UIGradientUtils.AddQuad(vh, v30, v2, v23, v3);
+                        
+                        if (m_option23_30)
+                        {
+                            UIGradientUtils.SetQuad(vh, v0, v1, v2, v30, i);
+                            UIGradientUtils.AddQuad(vh, v30, v2, v23, v3);
+                        }
+                        else
+                        {
+                            UIGradientUtils.SetQuad(vh, v0, v1, v2, v23, i);
+                            UIGradientUtils.AddQuad(vh, v30, v0, v23, v3);
+                        }
                     }
                     else if(split30 && split01)
                     {
@@ -125,9 +171,16 @@ public class UISlice : BaseMeshEffect {
                         0---x---3       0---30--3
                         */
 
-
-                        UIGradientUtils.SetQuad(vh, v01, v1, v2, v3, i);
-                        UIGradientUtils.AddQuad(vh, v01, v3, v30, v0);
+                        if (m_option30_01)
+                        {
+                            UIGradientUtils.SetQuad(vh, v01, v1, v2, v3, i);
+                            UIGradientUtils.AddQuad(vh, v01, v3, v30, v0);
+                        }
+                        else
+                        {
+                            UIGradientUtils.SetQuad(vh, v30, v1, v2, v3, i);
+                            UIGradientUtils.AddQuad(vh, v01, v1, v30, v0);
+                        }
                     }
                 }
             }
