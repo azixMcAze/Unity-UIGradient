@@ -36,4 +36,21 @@ public static class UIGradientUtils
 	{
 		get { return ms_verticesPositions; }
 	}
+
+	public static float InverseLerp (float a, float b, float v)
+	{
+		return a != b ? (v - a) / (b - a) : 0f;
+	}
+
+	public static void Lerp(UIVertex a, UIVertex b, float t, ref UIVertex c)
+	{
+		c.position = Vector3.LerpUnclamped(a.position, b.position, t);
+		c.normal = Vector3.LerpUnclamped(a.normal, b.normal, t);
+		c.color = Color.LerpUnclamped(a.color, b.color, t);
+		c.tangent = Vector3.LerpUnclamped(a.tangent, b.tangent, t);
+		c.uv0 = Vector3.LerpUnclamped(a.uv0, b.uv0, t);
+		c.uv1 = Vector3.LerpUnclamped(a.uv1, b.uv1, t);
+		// c.uv2 = Vector3.LerpUnclamped(a.uv2, b.uv2, t);
+		// c.uv3 = Vector3.LerpUnclamped(a.uv3, b.uv3, t);		
+	}
 }
