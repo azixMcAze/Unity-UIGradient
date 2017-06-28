@@ -27,8 +27,8 @@ public class UITextGradient : BaseMeshEffect
 
 				vh.PopulateUIVertex (ref vertex, i);
 				Vector2 normalizedPosition = UIGradientUtils.VerticePositions[i % 4];
-				Vector2 rotatedPosition = UIGradientUtils.Rotate(normalizedPosition - center, cos, sin) + center;
-				vertex.color *= Color.Lerp(m_color2, m_color1, rotatedPosition.y);
+				Vector2 localPosition = UIGradientUtils.Rotate(normalizedPosition - center, cos, sin) + center;
+				vertex.color *= Color.Lerp(m_color2, m_color1, localPosition.y);
 				vh.SetUIVertex (vertex, i);
 			}
 		}

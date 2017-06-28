@@ -30,13 +30,11 @@ public class UIGradient : BaseMeshEffect
 				sin /= norm;
 			}
 			
-			Vector2 center = new Vector2 (0.5f, 0.5f);
 			UIVertex vertex = default(UIVertex);
 			for (int i = 0; i < vh.currentVertCount; i++) {
 				vh.PopulateUIVertex (ref vertex, i);
-				Vector2 normalizedPosition = UIGradientUtils.NormalizedPosition(vertex.position, rect);
-				Vector2 rotatedPosition = UIGradientUtils.Rotate(normalizedPosition - center, cos, sin) + center;
-				vertex.color *= Color.Lerp(m_color2, m_color1, rotatedPosition.y);
+				Vector2 localPosition = UIGradientUtils.LocalPosition(vertex.position, rect, cos, sin);
+				vertex.color *= Color.Lerp(m_color2, m_color1, localPosition.y);
 				vh.SetUIVertex (vertex, i);
 			}
 		}
