@@ -31,15 +31,7 @@ public class UISlice : BaseMeshEffect {
 			int n = vh.currentVertCount;
 			for (int i = 0; i < n; i += 4)
 			{
-				int i0 = i;
-				int i1 = i + 1;
-				int i2 = i + 2;
-				int i3 = i + 3;
-
-				vh.PopulateUIVertex (ref v0, i0);
-				vh.PopulateUIVertex (ref v1, i1);
-				vh.PopulateUIVertex (ref v2, i2);
-				vh.PopulateUIVertex (ref v3, i3);
+				UIGradientUtils.GetQuad(vh, ref v0, ref v1, ref v2, ref v3, i);
 
 				Vector2 pos0 = LocalPosition(v0.position, rect, cos, sin);
 				Vector2 pos1 = LocalPosition(v1.position, rect, cos, sin);
@@ -60,50 +52,32 @@ public class UISlice : BaseMeshEffect {
 
 					if(split12 && split30)
 					{
-						vh.SetUIVertex (v0, i0);
-						vh.SetUIVertex (v1, i1);
-						vh.SetUIVertex (v12, i2);
-						vh.SetUIVertex (v30, i3);
+						UIGradientUtils.SetQuad(vh, v0, v1, v12, v30, i);
 						UIGradientUtils.AddQuad(vh, v30, v12, v2, v3);
 					}
 					else if(split01 && split23)
 					{
-						vh.SetUIVertex (v0, i0);
-						vh.SetUIVertex (v01, i1);
-						vh.SetUIVertex (v23, i2);
-						vh.SetUIVertex (v3, i3);
+						UIGradientUtils.SetQuad(vh,v0, v01, v23, v3, i);
 						UIGradientUtils.AddQuad(vh, v01, v1, v2, v23);
 					}
 					else if(split01 && split12)
 					{
-						vh.SetUIVertex (v0, i0);
-						vh.SetUIVertex (v12, i1);
-						vh.SetUIVertex (v2, i2);
-						vh.SetUIVertex (v3, i3);
+						UIGradientUtils.SetQuad(vh, v0, v12, v2, v3, i);
 						UIGradientUtils.AddQuad(vh, v01, v1, v12, v0);
 					}
 					else if(split12 && split23)
 					{
-						vh.SetUIVertex (v0, i0);
-						vh.SetUIVertex (v1, i1);
-						vh.SetUIVertex (v23, i2);
-						vh.SetUIVertex (v3, i3);
+						UIGradientUtils.SetQuad(vh, v0, v1, v23, v3, i);
 						UIGradientUtils.AddQuad(vh, v12, v2, v23, v1);
 					}
 					else if(split23 && split30)
 					{
-						vh.SetUIVertex (v0, i0);
-						vh.SetUIVertex (v1, i1);
-						vh.SetUIVertex (v2, i2);
-						vh.SetUIVertex (v30, i3);
+						UIGradientUtils.SetQuad(vh, v0, v1, v2, v30, i);
 						UIGradientUtils.AddQuad(vh, v30, v2, v23, v3);
 					}
 					else if(split30 && split01)
 					{
-						vh.SetUIVertex (v01, i0);
-						vh.SetUIVertex (v1, i1);
-						vh.SetUIVertex (v2, i2);
-						vh.SetUIVertex (v3, i3);
+						UIGradientUtils.SetQuad(vh, v01, v1, v2, v3, i);
 						UIGradientUtils.AddQuad(vh, v01, v3, v30, v0);
 					}
 				}
