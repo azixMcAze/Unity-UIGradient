@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public static class UIGradientUtils
 {
@@ -45,4 +46,22 @@ public static class UIGradientUtils
 		// c.uv2 = Vector3.LerpUnclamped(a.uv2, b.uv2, t);
 		// c.uv3 = Vector3.LerpUnclamped(a.uv3, b.uv3, t);		
 	}
+
+	public static int AddVert(VertexHelper vh, UIVertex v)
+	{
+		int i = vh.currentVertCount;
+		vh.AddVert(v);
+		return i;
+	}
+
+	public static void AddQuad(VertexHelper vh, UIVertex v0, UIVertex v1, UIVertex v2, UIVertex v3)
+	{
+		int i0 = AddVert(vh, v0);
+		int i1 = AddVert(vh, v1);
+		int i2 = AddVert(vh, v2);
+		int i3 = AddVert(vh, v3);
+		vh.AddTriangle(i0, i1, i2);
+		vh.AddTriangle(i2, i3, i0);
+	}
+
 }
