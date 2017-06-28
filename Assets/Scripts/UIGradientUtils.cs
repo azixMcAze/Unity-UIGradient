@@ -64,4 +64,19 @@ public static class UIGradientUtils
 		vh.AddTriangle(i2, i3, i0);
 	}
 
+	public static void SetQuad(VertexHelper vh, UIVertex v0, UIVertex v1, UIVertex v2, UIVertex v3, int i)
+	{
+		vh.SetUIVertex (v0, i);
+		vh.SetUIVertex (v1, i + 1);
+		vh.SetUIVertex (v2, i + 2);
+		vh.SetUIVertex (v3, i + 3);
+	}
+
+	public static void GetQuad(VertexHelper vh, ref UIVertex v0, ref UIVertex v1, ref UIVertex v2, ref UIVertex v3, int i)
+	{
+		vh.PopulateUIVertex (ref v0, i);
+		vh.PopulateUIVertex (ref v1, i + 1);
+		vh.PopulateUIVertex (ref v2, i + 2);
+		vh.PopulateUIVertex (ref v3, i + 3);
+	}
 }
