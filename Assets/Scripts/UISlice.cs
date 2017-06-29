@@ -40,10 +40,10 @@ public class UISlice : BaseMeshEffect {
             {
                 UIGradientUtils.GetQuad(vh, ref v0, ref v1, ref v2, ref v3, i);
 
-                Vector2 pos0 = LocalPosition(v0.position, rect, cos, sin);
-                Vector2 pos1 = LocalPosition(v1.position, rect, cos, sin);
-                Vector2 pos2 = LocalPosition(v2.position, rect, cos, sin);
-                Vector2 pos3 = LocalPosition(v3.position, rect, cos, sin);
+                Vector2 pos0 = UIGradientUtils.LocalPosition(v0.position, rect, cos, sin);
+                Vector2 pos1 = UIGradientUtils.LocalPosition(v1.position, rect, cos, sin);
+                Vector2 pos2 = UIGradientUtils.LocalPosition(v2.position, rect, cos, sin);
+                Vector2 pos3 = UIGradientUtils.LocalPosition(v3.position, rect, cos, sin);
 
                 bool side0 = pos0.y < m_slice;
                 bool side1 = pos1.y < m_slice;
@@ -185,14 +185,6 @@ public class UISlice : BaseMeshEffect {
                 }
             }
         }
-    }
-
-    static Vector2 LocalPosition(Vector3 position, Rect rect, float cos, float sin)
-    {
-        Vector2 center = new Vector2 (0.5f, 0.5f);
-        Vector2 normalizedPosition = UIGradientUtils.NormalizedPosition(position, rect);
-        Vector2 rotatedPosition = UIGradientUtils.Rotate(normalizedPosition - center, cos, sin) + center;
-        return rotatedPosition;
     }
 
     static bool SplitEdgeIfNeeded(UIVertex v0, UIVertex v1, float pos0, float pos1, float posSlice, bool side0, bool side1, ref UIVertex v2)
