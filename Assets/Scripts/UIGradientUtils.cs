@@ -12,8 +12,8 @@ public static class UIGradientUtils
 
 	public static Vector2 NormalizedPosition(Vector2 position, Rect rect)
 	{
-		float x = Mathf.InverseLerp (rect.xMin, rect.xMax, position.x);
-		float y = Mathf.InverseLerp (rect.yMin, rect.yMax, position.y);
+		float x = InverseLerp (rect.xMin, rect.xMax, position.x);
+		float y = InverseLerp (rect.yMin, rect.yMax, position.y);
 		return new Vector2(x, y);
 	}
 
