@@ -101,10 +101,7 @@ public class UIFullGradient : BaseMeshEffect
             int vertexCount = vh.currentVertCount;
             for (int i = 0; i < vertexCount; i += 4)
             {
-            	vh.PopulateUIVertex (ref v0, i);
-            	vh.PopulateUIVertex (ref v1, i + 1);
-            	vh.PopulateUIVertex (ref v2, i + 2);
-            	vh.PopulateUIVertex (ref v3, i + 3);
+				UIGradientUtils.GetQuad(vh, ref v0, ref v1, ref v2, ref v3, i);
 
             	Vector2 pos0 = localPositionMatrix * v0.position;
             	Vector2 pos1 = localPositionMatrix * v1.position;
@@ -144,10 +141,7 @@ public class UIFullGradient : BaseMeshEffect
             		v3.color *= m_gradient.Evaluate(pos3.y);
             	}
 
-            	vh.SetUIVertex (v0, i);
-            	vh.SetUIVertex (v1, i + 1);
-            	vh.SetUIVertex (v2, i + 2);
-            	vh.SetUIVertex (v3, i + 3);
+				UIGradientUtils.SetQuad(vh, v0, v1, v2, v3, i);
             }
         }
     }
