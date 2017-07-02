@@ -83,42 +83,8 @@ public class UIFullGradient : BaseMeshEffect
 
     public override void ModifyMesh(VertexHelper vh)
     {
-		// Debug.LogFormat("gradient {0} {1} alpha, {2} color", m_gradient.mode, m_gradient.alphaKeys.Length, m_gradient.colorKeys.Length);
-		// foreach(var key in m_gradient.alphaKeys)
-		// {
-		// 	Debug.LogFormat(" alpha {0} {1}", key.alpha, key.time);
-		// }
-		// foreach(var key in m_gradient.colorKeys)
-		// {
-		// 	Debug.LogFormat(" color {0} {1}", key.color, key.time);
-		// }
-
 		if(enabled)
 		{
-			// Debug.Log(vh.currentVertCount + "\n" + vh.currentIndexCount);
-
-
-			// int childs = transform.childCount;
-			// for (int i = childs - 1; i >= 0; i--)
-			// {
-			// 	GameObject.Destroy(transform.GetChild(i).gameObject);
-			// }
-
-
-            // System.Text.StringBuilder sb = new System.Text.StringBuilder();
-			// UIVertex vertex = default(UIVertex);
-			// for (int i = 0; i < vh.currentVertCount; i++) {
-			// 	vh.PopulateUIVertex (ref vertex, i);
-			// 	GameObject go = new GameObject(i.ToString());
-			// 	go.transform.SetParent(transform, false);
-			// 	go.transform.SetAsLastSibling();
-			// 	go.transform.localPosition = vertex.position;
-			// 	sb.AppendLine(vertex.position.ToString("F7"));
-			// }
-			// Debug.Log(sb.ToString());
-
-
-
             Rect rect = graphic.rectTransform.rect;
 
             float angleRad = m_angle * Mathf.Deg2Rad;
