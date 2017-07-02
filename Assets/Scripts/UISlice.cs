@@ -20,13 +20,10 @@ public class UISlice : BaseMeshEffect {
         if(enabled)
         {
             Rect rect = graphic.rectTransform.rect;
-            Vector2 rectMin = rect.min;
-			Vector2 recSize = rect.size;
-            Vector2 rectInvSize = new Vector2(1f / recSize.x, 1f/ recSize.y);
-
             float angleRad = m_angle * Mathf.Deg2Rad;
             float sin = Mathf.Sin(angleRad);
             float cos = Mathf.Cos(angleRad);
+            UIGradientUtils.Matrix2x3 matrix = UIGradientUtils.LocalPositionMatrix(rect, cos, sin);
 
             UIVertex v0 = default(UIVertex);
             UIVertex v1 = default(UIVertex);
@@ -43,10 +40,10 @@ public class UISlice : BaseMeshEffect {
             {
                 UIGradientUtils.GetQuad(vh, ref v0, ref v1, ref v2, ref v3, i);
 
-                Vector2 pos0 = UIGradientUtils.LocalPosition(v0.position, rectMin, rectInvSize, cos, sin);
-                Vector2 pos1 = UIGradientUtils.LocalPosition(v1.position, rectMin, rectInvSize, cos, sin);
-                Vector2 pos2 = UIGradientUtils.LocalPosition(v2.position, rectMin, rectInvSize, cos, sin);
-                Vector2 pos3 = UIGradientUtils.LocalPosition(v3.position, rectMin, rectInvSize, cos, sin);
+                Vector2 pos0 = matrix * v0.position;
+                Vector2 pos1 = matrix * v1.position;
+                Vector2 pos2 = matrix * v2.position;
+                Vector2 pos3 = matrix * v3.position;
 
                 bool side0 = pos0.y < m_slice;
                 bool side1 = pos1.y < m_slice;

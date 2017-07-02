@@ -120,14 +120,12 @@ public class UIFullGradient : BaseMeshEffect
 
 
             Rect rect = graphic.rectTransform.rect;
-            Vector2 rectMin = rect.min;
-			Vector2 recSize = rect.size;
-            Vector2 rectInvSize = new Vector2(1f / recSize.x, 1f/ recSize.y);
 
             float angleRad = m_angle * Mathf.Deg2Rad;
             float sin = Mathf.Sin(angleRad);
             float cos = Mathf.Cos(angleRad);
-            Vector2 center = new Vector2 (0.5f, 0.5f);
+
+			UIGradientUtils.Matrix2x3 localPositionMatrix = UIGradientUtils.LocalPositionMatrix(rect, cos, sin);
 
             List<float> keyTimes = GetKeyTimes(m_gradient);
             UIVertex v0 = default(UIVertex);
@@ -142,20 +140,15 @@ public class UIFullGradient : BaseMeshEffect
             	vh.PopulateUIVertex (ref v2, i + 2);
             	vh.PopulateUIVertex (ref v3, i + 3);
 
-            	Vector2 np0 = UIGradientUtils.NormalizedPosition(v0.position, rectMin, rectInvSize);
-            	Vector2 np1 = UIGradientUtils.NormalizedPosition(v1.position, rectMin, rectInvSize);
-            	Vector2 np2 = UIGradientUtils.NormalizedPosition(v2.position, rectMin, rectInvSize);
-            	Vector2 np3 = UIGradientUtils.NormalizedPosition(v3.position, rectMin, rectInvSize);
-				
-            	Vector2 rp0 = UIGradientUtils.Rotate(np0 - center, cos, sin) + center;
-            	Vector2 rp1 = UIGradientUtils.Rotate(np1 - center, cos, sin) + center;
-            	Vector2 rp2 = UIGradientUtils.Rotate(np2 - center, cos, sin) + center;
-            	Vector2 rp3 = UIGradientUtils.Rotate(np3 - center, cos, sin) + center;
+            	Vector2 pos0 = localPositionMatrix * v0.position;
+            	Vector2 pos1 = localPositionMatrix * v1.position;
+            	Vector2 pos2 = localPositionMatrix * v2.position;
+            	Vector2 pos3 = localPositionMatrix * v3.position;
 
-            	int i0 = keyTimes.BinarySearch(rp0.y);
-            	int i1 = keyTimes.BinarySearch(rp1.y);
-            	int i2 = keyTimes.BinarySearch(rp2.y);
-            	int i3 = keyTimes.BinarySearch(rp3.y);
+            	int i0 = keyTimes.BinarySearch(pos0.y);
+            	int i1 = keyTimes.BinarySearch(pos1.y);
+            	int i2 = keyTimes.BinarySearch(pos2.y);
+            	int i3 = keyTimes.BinarySearch(pos3.y);
 
 				if(i0 < 0)
 					i0 = ~i0;
@@ -177,12 +170,12 @@ public class UIFullGradient : BaseMeshEffect
 
 
 				// Debug.Log(i + " : " + rp0.y + ":" + i0 + " " + rp1.y + ":" + i1 + " " + rp2.y + ":" + i2 + " " + rp3.y + ":" + i3);
-            	// if(i0 == i1 && i0 == i2 && i0 == i3)
+            	if(i0 == i1 && i0 == i2 && i0 == i3)
             	{
-            		v0.color *= m_gradient.Evaluate(rp0.y);
-            		v1.color *= m_gradient.Evaluate(rp1.y);
-            		v2.color *= m_gradient.Evaluate(rp2.y);
-            		v3.color *= m_gradient.Evaluate(rp3.y);
+            		v0.color *= m_gradient.Evaluate(pos0.y);
+            		v1.color *= m_gradient.Evaluate(pos1.y);
+            		v2.color *= m_gradient.Evaluate(pos2.y);
+            		v3.color *= m_gradient.Evaluate(pos3.y);
             	}
 
             	vh.SetUIVertex (v0, i);
