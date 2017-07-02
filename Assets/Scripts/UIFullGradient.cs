@@ -10,7 +10,7 @@ public class UIFullGradient : BaseMeshEffect
 {
 	public Gradient m_gradient;
 	public Gradient m_gradient2;
-	public float[] m_times;
+	public List<float> m_times;
 	public Color m_color1 = Color.white;
 	public Color m_color2 = Color.white;
 	[Range(-180f, 180f)]
@@ -32,108 +32,53 @@ public class UIFullGradient : BaseMeshEffect
 		m_gradient2.mode = m_gradient.mode;
 	}
 
-	// static List<KeyValuePair<float, Color>> GetCombineGradient(Gradient gradient)
-	// {
-	// 	List<KeyValuePair<float, Color>> keyList = new List<KeyValuePair<float, Color>>();
-	// 	var colorKeys = gradient.colorKeys;
-	// 	var alphaKeys = gradient.alphaKeys;
-	// 	int nc = colorKeys.Length;
-	// 	int na = alphaKeys.Length;
-	// 	int ai = -1;
-	// 	int ci = -1;
-	// 	float t = 0f;
-
-	// 	while(ci < nc && ai < na)
-	// 	{
-	// 		Color ck, ck1;
-	// 		if(ci == -1)
-	// 		{
-
-	// 			ck = colorKeys[0].color;
-	// 			ck1 = colorKeys[0].color;
-	// 		}
-	// 		else if(ci == nc)
-	// 		{
-	// 			ck = colorKeys[nc - 1].color;
-	// 			ck1 = colorKeys[nc - 1].color;
-	// 		}
-	// 		else
-	// 		{
-	// 			ck = colorKeys[ci].color;
-	// 			ck1 = colorKeys[ci + 1].color;
-	// 		}
-
-	// 		var ak = alphaKeys[ai];
-
-	// 		t = Mathf.Min(ck.time, ak.time);
-
-	// 		var ck1 = colorKeys[ci + 1];
-	// 		var ak1 = alphaKeys[ai + 1];
-
-	// 		// if(ci == 0 && ai == 0)
-	// 		// {
-	// 		// 	if(ck.time > 0f || ak.time > 0f)
-	// 		// 	{
-	// 		// 		Color c = new Color(ck.color.r, ck.color.g, ck.color.b, ak.alpha);
-	// 		// 		// float t = 0f;
-	// 		// 		keyList.Add(new KeyValuePair<float, Color>(t, c));
-	// 		// 	}
-	// 		// }
-
-	// 		if(ck.time == t && ak.time == t)
-	// 		{
-	// 			Color c = ck.color;
-	// 			float a = ak.alpha;
-	// 			Color ca = new Color(c.r, c.g, c.b, a);
-	// 			keyList.Add(new KeyValuePair<float, Color>(t, ca));
-
-	// 			ai++;
-	// 			ci++;					
-	// 		}
-	// 		else if(ck.time == t)
-	// 		{
-	// 			Color c = ck.color;
-	// 			float at = (t - ak.time) / (ak1.time - ak.time);
-	// 			float a = Mathf.Lerp(ak.alpha, ak1.alpha, at);
-	// 			Color ca = new Color(c.r, c.g, c.b, a);
-	// 			keyList.Add(new KeyValuePair<float, Color>(t, ca));
-
-	// 			ci++;
-	// 		}
-	// 		else if(ak.time == t)
-	// 		{
-	// 			float ct = (t - ck.time) / (ck1.time - ck.time);
-	// 			Color c = Color.Lerp(ck.color, ck1.color, ct);
-	// 			float a = ak.alpha;
-	// 			Color ca = new Color(c.r, c.g, c.b, a);
-	// 			keyList.Add(new KeyValuePair<float, Color>(t, ca));
-
-	// 			ai++;
-	// 		}
-
-
-	// 		// if(ci == colorKeys.Length - 1 && ai == alphaKeys.Length - 1)
-	// 		// {
-	// 		// 	if(ck.time < 1f || ak.time < 1f)
-	// 		// 	{
-	// 		// 		Color c = new Color(ck.color.r, ck.color.g, ck.color.b, ak.alpha);
-	// 		// 		// float t = 1f;
-	// 		// 		keyList.Add(new KeyValuePair<float, Color>(t, c));
-	// 		// 	}
-	// 		// }
-	// 	}
-
-	// 	return keyList;
-
-	// }
-
-	static float[] GetKeyTimes(Gradient gradient)
+	static List<float> GetKeyTimes(Gradient gradient)
 	{
-		float[] keyTimes = new float[] {0f, 1f};
-		var colorKeysTimes = gradient.colorKeys.Select(k => k.time);
-		var alphaKeysTimes = gradient.alphaKeys.Select(k => k.time);
-		var uniqueTimes = keyTimes.Concat(colorKeysTimes).Concat(alphaKeysTimes).Distinct().OrderBy(t => t);
-		return uniqueTimes.ToArray();
+		List<float> keyList = new List<float>(gradient.alphaKeys.Length + gradient.colorKeys.Length);
+		var colorKeys = gradient.colorKeys;
+		var alphaKeys = gradient.alphaKeys;
+		int nc = colorKeys.Length;
+		int na = alphaKeys.Length;
+		int ic = 0;
+		int ia = 0;
+		float t = -1f;
+		
+		while(ic < nc || ia < na)
+		{
+			float tk;
+			if(ic < nc && ia < na)
+			{
+				float tc = colorKeys[ic].time;
+				float ta = alphaKeys[ia].time;
+				if(tc < ta)
+				{
+					tk = tc;
+					ic++;
+				}
+				else
+				{
+					tk = ta;
+					ia++;
+				}
+			}
+			else if(ic < nc)
+			{
+				tk = colorKeys[ic].time;
+				ic++;
+			}
+			else //if(ia < nc)
+			{
+				tk = alphaKeys[ia].time;
+				ia++;
+			}
+
+			if(tk > t)
+			{
+				t = tk;
+				keyList.Add(tk);
+			}
+		}
+		return keyList;
 	}
 
     public override void ModifyMesh(VertexHelper vh)
@@ -183,7 +128,7 @@ public class UIFullGradient : BaseMeshEffect
             float cos = Mathf.Cos(angleRad);
             Vector2 center = new Vector2 (0.5f, 0.5f);
 
-            float[] keyTimes = GetKeyTimes(m_gradient);
+            List<float> keyTimes = GetKeyTimes(m_gradient);
             UIVertex v0 = default(UIVertex);
             UIVertex v1 = default(UIVertex);
             UIVertex v2 = default(UIVertex);
@@ -206,10 +151,10 @@ public class UIFullGradient : BaseMeshEffect
             	Vector2 rp2 = UIGradientUtils.Rotate(np2 - center, cos, sin) + center;
             	Vector2 rp3 = UIGradientUtils.Rotate(np3 - center, cos, sin) + center;
 
-            	int i0 = Array.BinarySearch(keyTimes, rp0.y);
-            	int i1 = Array.BinarySearch(keyTimes, rp1.y);
-            	int i2 = Array.BinarySearch(keyTimes, rp2.y);
-            	int i3 = Array.BinarySearch(keyTimes, rp3.y);
+            	int i0 = keyTimes.BinarySearch(rp0.y);
+            	int i1 = keyTimes.BinarySearch(rp1.y);
+            	int i2 = keyTimes.BinarySearch(rp2.y);
+            	int i3 = keyTimes.BinarySearch(rp3.y);
 
 				if(i0 < 0)
 					i0 = ~i0;
