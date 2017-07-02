@@ -21,7 +21,7 @@ public class UICornersGradient : BaseMeshEffect {
 			for (int i = 0; i < vh.currentVertCount; i++) {
 				vh.PopulateUIVertex (ref vertex, i);
 				Vector2 normalizedPosition = localPositionMatrix * vertex.position;
-				vertex.color *= UIGradientUtils.InterpolatedColor(normalizedPosition, m_topLeftColor, m_topRightColor, m_bottomLeftColor, m_bottomRightColor);
+				vertex.color *= UIGradientUtils.Bilerp(m_bottomLeftColor, m_bottomRightColor, m_topLeftColor, m_topRightColor, normalizedPosition);
 				vh.SetUIVertex (vertex, i);
 			}
 		}

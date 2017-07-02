@@ -40,13 +40,6 @@ public static class UIGradientUtils
 		return new Matrix2x3(m00, m01, m02, m10, m11, m12);
 	}
 
-	public static Color InterpolatedColor(Vector2 normalizedPosition, Color topLeft, Color topRight, Color bottomLeft, Color bottomRight)
-	{
-		Color top = Color.LerpUnclamped(topLeft, topRight, normalizedPosition.x);
-		Color bottom = Color.LerpUnclamped(bottomLeft, bottomRight, normalizedPosition.x);
-		return Color.LerpUnclamped(bottom, top, normalizedPosition.y);
-	}
-
 	static Vector2[] ms_verticesPositions = new Vector2[] { Vector2.up, Vector2.one, Vector2.right, Vector2.zero };
 	public static Vector2[] VerticePositions
 	{
@@ -56,6 +49,13 @@ public static class UIGradientUtils
 	public static float InverseLerp (float a, float b, float v)
 	{
 		return a != b ? (v - a) / (b - a) : 0f;
+	}
+
+	public static Color Bilerp(Color a1, Color a2, Color b1, Color b2, Vector2 t)
+	{
+		Color a = Color.LerpUnclamped(a1, a2, t.x);
+		Color b = Color.LerpUnclamped(b1, b2, t.x);
+		return Color.LerpUnclamped(a, b, t.y);
 	}
 
 	public static void Lerp(UIVertex a, UIVertex b, float t, ref UIVertex c)
