@@ -175,6 +175,8 @@ public class UIFullGradient : BaseMeshEffect
 
 
             Rect rect = graphic.rectTransform.rect;
+            Vector2 rectMin = rect.min;
+            Vector2 rectMax = rect.max;
 
             float angleRad = m_angle * Mathf.Deg2Rad;
             float sin = Mathf.Sin(angleRad);
@@ -194,10 +196,10 @@ public class UIFullGradient : BaseMeshEffect
             	vh.PopulateUIVertex (ref v2, i + 2);
             	vh.PopulateUIVertex (ref v3, i + 3);
 
-            	Vector2 np0 = UIGradientUtils.NormalizedPosition(v0.position, rect);
-            	Vector2 np1 = UIGradientUtils.NormalizedPosition(v1.position, rect);
-            	Vector2 np2 = UIGradientUtils.NormalizedPosition(v2.position, rect);
-            	Vector2 np3 = UIGradientUtils.NormalizedPosition(v3.position, rect);
+            	Vector2 np0 = UIGradientUtils.NormalizedPosition(v0.position, rectMin, rectMax);
+            	Vector2 np1 = UIGradientUtils.NormalizedPosition(v1.position, rectMin, rectMax);
+            	Vector2 np2 = UIGradientUtils.NormalizedPosition(v2.position, rectMin, rectMax);
+            	Vector2 np3 = UIGradientUtils.NormalizedPosition(v3.position, rectMin, rectMax);
 				
             	Vector2 rp0 = UIGradientUtils.Rotate(np0 - center, cos, sin) + center;
             	Vector2 rp1 = UIGradientUtils.Rotate(np1 - center, cos, sin) + center;
