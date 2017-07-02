@@ -15,14 +15,12 @@ public class UICornersGradient : BaseMeshEffect {
 		if(enabled)
 		{
             Rect rect = graphic.rectTransform.rect;
-            Vector2 rectMin = rect.min;
-			Vector2 recSize = rect.size;
-			Vector2 rectInvSize = new Vector2(1f / recSize.x, 1f/ recSize.y);
-			
+			UIGradientUtils.Matrix2x3 localPositionMatrix = UIGradientUtils.LocalPositionMatrix(rect, 1f, 0f);
+
 			UIVertex vertex = default(UIVertex);
 			for (int i = 0; i < vh.currentVertCount; i++) {
 				vh.PopulateUIVertex (ref vertex, i);
-				Vector2 normalizedPosition = UIGradientUtils.NormalizedPosition(vertex.position, rectMin, rectInvSize);
+				Vector2 normalizedPosition = localPositionMatrix * vertex.position;
 				vertex.color *= UIGradientUtils.InterpolatedColor(normalizedPosition, m_topLeftColor, m_topRightColor, m_bottomLeftColor, m_bottomRightColor);
 				vh.SetUIVertex (vertex, i);
 			}
