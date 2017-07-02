@@ -61,14 +61,6 @@ public static class UIGradientUtils
 		return new Vector2(x, y);
 	}
 
-	static Vector2 ms_center = new Vector2 (0.5f, 0.5f);
-	public static Vector2 LocalPosition(Vector3 position, Vector2 rectMin, Vector2 rectInvSize, float cos, float sin)
-	{
-		Vector2 normalizedPosition = UIGradientUtils.NormalizedPosition(position, rectMin, rectInvSize);
-		Vector2 rotatedPosition = UIGradientUtils.Rotate(normalizedPosition - ms_center, cos, sin) + ms_center;
-		return rotatedPosition;
-	}
-
 	static Vector2[] ms_verticesPositions = new Vector2[] { Vector2.up, Vector2.one, Vector2.right, Vector2.zero };
 	public static Vector2[] VerticePositions
 	{
