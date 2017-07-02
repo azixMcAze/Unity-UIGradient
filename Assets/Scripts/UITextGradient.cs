@@ -20,14 +20,16 @@ public class UITextGradient : BaseMeshEffect
 			float angleRad = m_angle * Mathf.Deg2Rad;
 			float sin = Mathf.Sin(angleRad);
 			float cos = Mathf.Cos(angleRad);
-			
+
+			UIGradientUtils.Matrix2x3 localPositionMatrix = UIGradientUtils.LocalPositionMatrix(new Rect(0f, 0f, 1f, 1f), cos, sin);
+
 			Vector2 center = new Vector2 (0.5f, 0.5f);
 			UIVertex vertex = default(UIVertex);
 			for (int i = 0; i < vh.currentVertCount; i++) {
 
 				vh.PopulateUIVertex (ref vertex, i);
-				Vector2 normalizedPosition = UIGradientUtils.VerticePositions[i % 4];
-				Vector2 localPosition = UIGradientUtils.Rotate(normalizedPosition - center, cos, sin) + center;
+				Vector2 position = UIGradientUtils.VerticePositions[i % 4];
+				Vector2 localPosition = localPositionMatrix * position;
 				vertex.color *= Color.Lerp(m_color2, m_color1, localPosition.y);
 				vh.SetUIVertex (vertex, i);
 			}
