@@ -10,10 +10,10 @@ public static class UIGradientUtils
 		return Color.Lerp(bottom, top, normalizedPosition.y);
 	}
 
-	public static Vector2 NormalizedPosition(Vector2 position, Vector2 rectMin, Vector2 rectMax)
+	public static Vector2 NormalizedPosition(Vector2 position, Vector2 rectMin, Vector2 rectInvSize)
 	{
-		float x = InverseLerp (rectMin.x, rectMax.x, position.x);
-		float y = InverseLerp (rectMin.y, rectMax.y, position.y);
+		float x = (position.x - rectMin.x) * rectInvSize.x;
+		float y = (position.y - rectMin.y) * rectInvSize.y;
 		return new Vector2(x, y);
 	}
 
@@ -25,9 +25,9 @@ public static class UIGradientUtils
 	}
 
 	static Vector2 ms_center = new Vector2 (0.5f, 0.5f);
-	public static Vector2 LocalPosition(Vector3 position, Vector2 rectMin, Vector2 rectMax, float cos, float sin)
+	public static Vector2 LocalPosition(Vector3 position, Vector2 rectMin, Vector2 rectInvSize, float cos, float sin)
 	{
-		Vector2 normalizedPosition = UIGradientUtils.NormalizedPosition(position, rectMin, rectMax);
+		Vector2 normalizedPosition = UIGradientUtils.NormalizedPosition(position, rectMin, rectInvSize);
 		Vector2 rotatedPosition = UIGradientUtils.Rotate(normalizedPosition - ms_center, cos, sin) + ms_center;
 		return rotatedPosition;
 	}
