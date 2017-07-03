@@ -66,7 +66,7 @@ public class UIFullGradient : BaseMeshEffect
 				tk = colorKeys[ic].time;
 				ic++;
 			}
-			else //if(ia < nc)
+			else //if(ia < na)
 			{
 				tk = alphaKeys[ia].time;
 				ia++;
