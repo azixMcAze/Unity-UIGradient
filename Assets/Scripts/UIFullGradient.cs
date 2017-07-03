@@ -140,25 +140,25 @@ public class UIFullGradient : BaseMeshEffect
                     bool split01 = SplitEdgeIfNeeded(v0, v1, pos0.y, pos1.y, slice, side0, side1, ref v01);
 					if(split01)
 					{
-						Vector2 pos01 = UIGradientUtils.LocalPosition(v01.position, rect, cos, sin);
+						Vector2 pos01 = localPositionMatrix * v01.position;
 						v01.color *= m_gradient.Evaluate(pos01.y);
 					}
                     bool split12 = SplitEdgeIfNeeded(v1, v2, pos1.y, pos2.y, slice, side1, side2, ref v12);
 					if(split12)
 					{
-						Vector2 pos12 = UIGradientUtils.LocalPosition(v12.position, rect, cos, sin);
+						Vector2 pos12 = localPositionMatrix * v12.position;
 						v12.color *= m_gradient.Evaluate(pos12.y);
 					}
                     bool split23 = SplitEdgeIfNeeded(v2, v3, pos2.y, pos3.y, slice, side2, side3, ref v23);
 					if(split23)
 					{
-						Vector2 pos23 = UIGradientUtils.LocalPosition(v23.position, rect, cos, sin);
+						Vector2 pos23 = localPositionMatrix * v23.position;
 						v23.color *= m_gradient.Evaluate(pos23.y);
 					}
                     bool split30 = SplitEdgeIfNeeded(v3, v0, pos3.y, pos0.y, slice, side3, side0, ref v30);
 					if(split30)
 					{
-						Vector2 pos30 = UIGradientUtils.LocalPosition(v30.position, rect, cos, sin);
+						Vector2 pos30 = localPositionMatrix * v30.position;
 						v30.color *= m_gradient.Evaluate(pos30.y);
 					}
 
