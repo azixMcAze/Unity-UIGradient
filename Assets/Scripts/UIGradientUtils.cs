@@ -46,6 +46,15 @@ public static class UIGradientUtils
 		get { return ms_verticesPositions; }
 	}
 
+	public static void CompensateAspectRatio(Rect rect, float cos, float sin, out float out_cos, out float out_sin)
+	{
+		float ratio = rect.height / rect.width;
+		cos *= ratio;
+		float norm = Mathf.Sqrt (cos * cos + sin * sin);
+		out_cos = cos / norm;
+		out_sin = sin / norm;
+	}
+
 	public static float InverseLerp (float a, float b, float v)
 	{
 		return a != b ? (v - a) / (b - a) : 0f;
