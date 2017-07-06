@@ -15,7 +15,7 @@ public class UICornersGradient : BaseMeshEffect {
 		if(enabled)
 		{
             Rect rect = graphic.rectTransform.rect;
-			UIGradientUtils.Matrix2x3 localPositionMatrix = UIGradientUtils.LocalPositionMatrix(rect, 1f, 0f);
+			UIGradientUtils.Matrix2x3 localPositionMatrix = UIGradientUtils.LocalPositionMatrix(rect, Vector2.right);
 
 			UIVertex vertex = default(UIVertex);
 			for (int i = 0; i < vh.currentVertCount; i++) {

@@ -24,8 +24,10 @@ public static class UIGradientUtils
 		}
 	}
 
-	public static Matrix2x3 LocalPositionMatrix(Rect rect, float cos, float sin)
+	public static Matrix2x3 LocalPositionMatrix(Rect rect, Vector2 dir)
 	{
+		float cos = dir.x;
+		float sin = dir.y;
 		Vector2 rectMin = rect.min;
 		Vector2 rectSize = rect.size;
 		float c = 0.5f;
@@ -46,13 +48,19 @@ public static class UIGradientUtils
 		get { return ms_verticesPositions; }
 	}
 
-	public static void CompensateAspectRatio(Rect rect, float cos, float sin, out float out_cos, out float out_sin)
+	public static Vector2 RotationDir(float angle)
+	{
+		float angleRad = angle * Mathf.Deg2Rad;
+		float cos = Mathf.Cos(angleRad);
+		float sin = Mathf.Sin(angleRad);
+		return new Vector2(cos, sin);
+	}
+
+	public static Vector2 CompensateAspectRatio(Rect rect, Vector2 dir)
 	{
 		float ratio = rect.height / rect.width;
-		cos *= ratio;
-		float norm = Mathf.Sqrt (cos * cos + sin * sin);
-		out_cos = cos / norm;
-		out_sin = sin / norm;
+		dir.x *= ratio;
+		return dir.normalized;
 	}
 
 	public static float InverseLerp (float a, float b, float v)

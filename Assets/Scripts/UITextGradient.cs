@@ -16,12 +16,8 @@ public class UITextGradient : BaseMeshEffect
 		if(enabled)
 		{
 			Rect rect = graphic.rectTransform.rect;
-
-			float angleRad = m_angle * Mathf.Deg2Rad;
-			float sin = Mathf.Sin(angleRad);
-			float cos = Mathf.Cos(angleRad);
-
-			UIGradientUtils.Matrix2x3 localPositionMatrix = UIGradientUtils.LocalPositionMatrix(new Rect(0f, 0f, 1f, 1f), cos, sin);
+			Vector2 dir = UIGradientUtils.RotationDir(m_angle);
+			UIGradientUtils.Matrix2x3 localPositionMatrix = UIGradientUtils.LocalPositionMatrix(new Rect(0f, 0f, 1f, 1f), dir);
 
 			UIVertex vertex = default(UIVertex);
 			for (int i = 0; i < vh.currentVertCount; i++) {
