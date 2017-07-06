@@ -9,28 +9,9 @@ using System;
 public class UIFullGradient : BaseMeshEffect
 {
     public Gradient m_gradient;
-    public Gradient m_gradient2;
-    public List<float> m_times;
-    public Color m_color1 = Color.white;
-    public Color m_color2 = Color.white;
     [Range(-180f, 180f)]
     public float m_angle = 0f;
     public bool m_ignoreRatio = true;
-
-
-    public new void OnValidate()
-    {
-        base.OnValidate();
-        // List<KeyValuePair<float, Color>> keyList = GetCombineGradient(m_gradient);
-        // var colorKeys = keyList.Select(kvp => new GradientColorKey(new Color(kvp.Value.r, kvp.Value.g, kvp.Value.b, 1f), kvp.Key)).ToArray();
-        // var alphaKeys = keyList.Select(kvp => new GradientAlphaKey(kvp.Value.a, kvp.Key)).ToArray();
-
-        m_times = GetKeyTimes(m_gradient);
-        var colorKeys = m_times.Select(t => new GradientColorKey(m_gradient.Evaluate(t), t)).ToArray();
-        var alphaKeys = m_times.Select(t => new GradientAlphaKey(m_gradient.Evaluate(t).a, t)).ToArray();
-        m_gradient2.SetKeys(colorKeys, alphaKeys);
-        m_gradient2.mode = m_gradient.mode;
-    }
 
     static List<float> GetKeyTimes(Gradient gradient)
     {
