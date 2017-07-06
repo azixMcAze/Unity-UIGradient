@@ -23,7 +23,6 @@ public class UITextGradient : BaseMeshEffect
 
             UIGradientUtils.Matrix2x3 localPositionMatrix = UIGradientUtils.LocalPositionMatrix(new Rect(0f, 0f, 1f, 1f), cos, sin);
 
-            Vector2 center = new Vector2 (0.5f, 0.5f);
             UIVertex vertex = default(UIVertex);
             for (int i = 0; i < vh.currentVertCount; i++) {
 
