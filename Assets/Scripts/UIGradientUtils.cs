@@ -70,6 +70,22 @@ public static class UIGradientUtils
         // c.uv3 = Vector3.LerpUnclamped(a.uv3, b.uv3, t);		
     }
 
+    static byte MulLerp(byte a, byte b, float t, byte mul)
+    {
+        float lerp = (float)a * (1f - t) + (float)b * t;
+        float mullerp = 255f * (lerp / 255f * mul / 255f);
+        return (byte)mullerp;
+    }
+
+    public static Color32 MulLerp(Color32 ca, Color32 cb, float t, Color32 cmul)
+    {
+        byte r = MulLerp(ca.r, cb.r, t, cmul.r);
+        byte g = MulLerp(ca.g, cb.g, t, cmul.g);
+        byte b = MulLerp(ca.b, cb.b, t, cmul.b);
+        byte a = MulLerp(ca.a, cb.a, t, cmul.a);
+        return new Color32(r, g, b, a);
+    }
+
     public static int AddVert(VertexHelper vh, UIVertex v)
     {
         int i = vh.currentVertCount;
