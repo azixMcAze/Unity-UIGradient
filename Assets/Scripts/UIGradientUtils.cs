@@ -18,7 +18,7 @@ public static class UIGradientUtils
 
         public static Vector2 operator*(Matrix2x3 m, Vector2 v)
         {
-            float x = (m.m00 * v.x) - (m.m01 * v.y) + m.m02;
+            float x = (m.m00 * v.x) + (m.m01 * v.y) + m.m02;
             float y = (m.m10 * v.x) + (m.m11 * v.y) + m.m12;
             return new Vector2(x, y);
         }
@@ -32,7 +32,7 @@ public static class UIGradientUtils
         float ax = rectMin.x / rectSize.x + c;
         float ay = rectMin.y / rectSize.y + c;
         float m00 = cos / rectSize.x;
-        float m01 = sin / rectSize.y;
+        float m01 = -sin / rectSize.y;
         float m02 = -(ax * cos - ay * sin - c);
         float m10 = sin / rectSize.x;
         float m11 = cos / rectSize.y;		
