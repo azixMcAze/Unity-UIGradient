@@ -42,7 +42,7 @@ public static class UIGradientUtils
     }
 
     static Vector2[] ms_verticesPositions = new Vector2[] { Vector2.up, Vector2.one, Vector2.right, Vector2.zero };
-    public static Vector2[] VerticePositions
+    public static Vector2[] VerticesPositions
     {
         get { return ms_verticesPositions; }
     }
@@ -68,7 +68,7 @@ public static class UIGradientUtils
         c.uv0 = Vector3.LerpUnclamped(a.uv0, b.uv0, t);
         c.uv1 = Vector3.LerpUnclamped(a.uv1, b.uv1, t);
         // c.uv2 = Vector3.LerpUnclamped(a.uv2, b.uv2, t);
-        // c.uv3 = Vector3.LerpUnclamped(a.uv3, b.uv3, t);		
+        // c.uv3 = Vector3.LerpUnclamped(a.uv3, b.uv3, t);
     }
 
     static byte Mul(byte a, byte b)

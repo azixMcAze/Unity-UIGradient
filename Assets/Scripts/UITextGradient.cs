@@ -27,7 +27,7 @@ public class UITextGradient : BaseMeshEffect
             for (int i = 0; i < vh.currentVertCount; i++) {
 
                 vh.PopulateUIVertex (ref vertex, i);
-                Vector2 position = UIGradientUtils.VerticePositions[i % 4];
+                Vector2 position = UIGradientUtils.VerticesPositions[i % 4];
                 Vector2 localPosition = localPositionMatrix * position;
                 vertex.color *= Color.Lerp(m_color2, m_color1, localPosition.y);
                 vh.SetUIVertex (vertex, i);

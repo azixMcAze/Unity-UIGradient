@@ -19,7 +19,7 @@ public class UITextCornersGradient : BaseMeshEffect {
             UIVertex vertex = default(UIVertex);
             for (int i = 0; i < vh.currentVertCount; i++) {
                 vh.PopulateUIVertex (ref vertex, i);
-                Vector2 normalizedPosition = UIGradientUtils.VerticePositions[i % 4];
+                Vector2 normalizedPosition = UIGradientUtils.VerticesPositions[i % 4];
                 vertex.color *= UIGradientUtils.Bilerp(m_bottomLeftColor, m_bottomRightColor, m_topLeftColor, m_topRightColor, normalizedPosition);
                 vh.SetUIVertex (vertex, i);
             }
