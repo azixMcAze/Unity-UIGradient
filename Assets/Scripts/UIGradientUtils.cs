@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public static class UIGradientUtils
@@ -92,6 +93,13 @@ public static class UIGradientUtils
         return i;
     }
 
+    public static int AddVert(List<UIVertex> verts, UIVertex v)
+    {
+        int i = verts.Count;
+        verts.Add(v);
+        return i;
+    }
+
     public static void AddQuad(VertexHelper vh, UIVertex v0, UIVertex v1, UIVertex v2, UIVertex v3)
     {
         int i0 = AddVert(vh, v0);
@@ -102,6 +110,16 @@ public static class UIGradientUtils
         vh.AddTriangle(i2, i3, i0);
     }
 
+    public static void AddQuad(List<UIVertex> verts, UIVertex v0, UIVertex v1, UIVertex v2, UIVertex v3)
+    {
+        verts.Add(v0);
+        verts.Add(v1);
+        verts.Add(v2);
+        verts.Add(v2);
+        verts.Add(v3);
+        verts.Add(v0);
+    }
+
     public static void SetQuad(VertexHelper vh, UIVertex v0, UIVertex v1, UIVertex v2, UIVertex v3, int i)
     {
         vh.SetUIVertex (v0, i);
@@ -110,11 +128,27 @@ public static class UIGradientUtils
         vh.SetUIVertex (v3, i + 3);
     }
 
+    public static void SetQuad(List<UIVertex> verts, UIVertex v0, UIVertex v1, UIVertex v2, UIVertex v3, int i)
+    {
+        verts[i] = v0;
+        verts[i + 1] = v1;
+        verts[i + 2] = v2;
+        verts[i + 3] = v3;
+    }
+
     public static void GetQuad(VertexHelper vh, ref UIVertex v0, ref UIVertex v1, ref UIVertex v2, ref UIVertex v3, int i)
     {
         vh.PopulateUIVertex (ref v0, i);
         vh.PopulateUIVertex (ref v1, i + 1);
         vh.PopulateUIVertex (ref v2, i + 2);
         vh.PopulateUIVertex (ref v3, i + 3);
+    }
+
+    public static void GetQuad(List<UIVertex> verts, ref UIVertex v0, ref UIVertex v1, ref UIVertex v2, ref UIVertex v3, int i)
+    {
+        v0 = verts[i];
+        v1 = verts[i + 1];
+        v2 = verts[i + 2];
+        v3 = verts[i + 3];
     }
 }
