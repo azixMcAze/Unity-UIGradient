@@ -35,7 +35,7 @@ public class UIGradient : BaseMeshEffect
             for (int i = 0; i < vh.currentVertCount; i++) {
                 vh.PopulateUIVertex (ref vertex, i);
                 Vector2 localPosition = localPositionMatrix * vertex.position;
-                vertex.color = UIGradientUtils.MulLerp(m_color2, m_color1, Mathf.Clamp01(localPosition.y), vertex.color);
+                vertex.color = UIGradientUtils.Mul(Color32.Lerp(m_color2, m_color1, localPosition.y), vertex.color);
                 vh.SetUIVertex (vertex, i);
             }
         }
